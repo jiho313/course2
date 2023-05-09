@@ -21,6 +21,8 @@ public class CourseController {
 	private CourseService courseService = CourseService.getInstance();
 	
 	
+
+	
 	private LoginUser loginUser;
 	
 	public void menu() {
@@ -252,6 +254,8 @@ public class CourseController {
 		
 		List<Map<String, Object>> registrations 
 			= courseService.수강신청현황(loginUser.getId());
+
+		
 		
 		if (registrations.isEmpty()) {
 			System.out.println("### 수강신청 내역이 존재하지 않습니다.");

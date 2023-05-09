@@ -12,11 +12,8 @@ public class StudentDao {
 		return instance;
 	}	
 
-	public Student getStudentById(String studentId) {
-		String sql = "select * "
-				+ " from academy_students "
-				+ " where student_id = ? ";
-		return DaoHelper.selectOne(sql, rs -> {
+	public Student getStudentById(String studentId) {		
+		return DaoHelper.selectOne("studentdao.getStudentById", rs -> {
 			Student student = new Student();
 			student.setId(rs.getString("student_id"));
 			student.setPassword(rs.getString("student_password"));
@@ -29,11 +26,7 @@ public class StudentDao {
 	}
 	
 	public Student getStudentByEmail(String studentEmail) {
-		String sql = "select * "
-				+ " from academy_students "
-				+ " where student_email = ? ";
-		
-		return DaoHelper.selectOne(sql, rs -> {
+		return DaoHelper.selectOne("studentdao.getStudentByEmail", rs -> {
 			Student student = new Student();
 			student.setId(rs.getString("student_id"));
 			student.setPassword(rs.getString("student_password"));
@@ -46,12 +39,7 @@ public class StudentDao {
 	}
 	
 	public void insertStudent(Student student) {
-		String sql = "insert into academy_students "
-				+ "(student_id, student_password, student_name, student_email, student_phone)"
-				+ "values "
-				+ "(?,?,?,?,?)";
-		
-		DaoHelper.update(sql,
+		DaoHelper.update("studentdao.insertStudent",
 				student.getId(),
 				student.getPassword(),
 				student.getName(),
